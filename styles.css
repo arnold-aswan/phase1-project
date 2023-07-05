@@ -183,6 +183,19 @@ header {
     padding-left: .5rem;
     border-left: 2px solid gray;
 }
+.btn-more {
+    color: #fff;
+    font-family: poppins;
+    font-weight: 500;
+    padding: .6rem .8rem;
+    background: transparent;
+    border-radius: .5rem;
+    border: 2px solid var(--pink);
+    outline: none;
+}
+.btn-more:hover {
+    background: var(--pink);
+}
 /* ======== END OF SHOWS SECTION ============ */
 
 /* ======== TRENDING SHOWS LIST SECTION =========== */
@@ -225,7 +238,6 @@ ul.trending-list {
 .trending-show:hover .wshow-body{
     background: var(--pink);
 }
-
 /* ======== END OF TRENDING SHOWS LIST ============ */
 
 /* ========= FOOTER ============= */

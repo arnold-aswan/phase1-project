@@ -56,16 +56,42 @@ const getTitles = ()=> {
     // .then(response => console.log(response.suggestions[0].summary.name))
     // .then(data => console.log(data.suggestions.sumary.name))
 }
-// getTitles()
+getTitles()
 
 const renderTitles = (data) => {
     // console.log(data);
     
-    const shows = data.titles.filter(show => show.jawSummary.type === "show")
-    const movies = data.titles.filter(movie => movie.jawSummary.type === "movie")
+    const shows = data.titles.filter(show => show.jawSummary.type === "show" && show.jawSummary.watched === false)
+    const movies = data.titles.filter(movie => movie.jawSummary.type === "movie" && movie.jawSummary.watched === false)
   
-    console.log(shows);
-    console.log(movies);
+    const watchedShows = data.titles.filter(wshow => wshow.jawSummary.watched === true)
+    const typeMovies = data.titles.filter(wmovie => wmovie.summary.type === 'movie')
+    const watchedMovies = typeMovies.filter(wshow => wshow.jawSummary.watched === true)
+    
+    console.log(watchedShows);
+    // console.log(typeMovies);
+    // console.log(watchedMovies);
+    // console.log(shows);
+    // console.log(movies);
+    watchedShows.map(wshow => {
+        const watchedUl = document.querySelector('.watched-list')
+        const li = document.createElement("li")
+
+        li.className = 'watched-show'
+        li.innerHTML = ` <article class="wshow">
+        <div class="watched-show-poster">
+            <img src="${wshow.jawSummary.backgroundImage.url}" alt="title-poster" class="watched-poster">
+        </div>
+        <div class="wshow-body">
+            <h5 class="title">${wshow.jawSummary.title}</h5>
+                <div class="winfo">
+                 <i class="fa-solid fa-star"></i> 4.7
+                 <p class="wgenre">${wshow.jawSummary.genres[0].name}</p>
+                </div>
+            </div>
+    </article>`
+    watchedUl.append(li)
+    })
 
     movies.map(movie => {
         const moviesUl = document.querySelector('.suggested-shows')
@@ -79,9 +105,9 @@ const renderTitles = (data) => {
             <div class="show-body">
             <h4 class="title">${movie.jawSummary.title}</h4>
                 <div class="info">
-                    <small class="title-description">${movie.jawSummary.synopsis}</small>
+                 <i class="fa-solid fa-star"></i> 4.7
+                 <p class="genre">${movie.jawSummary.genres[0].name}</p>
                 </div>
-                <button class="btn-watch">Watch Now</button>
             </div>
         </article>
         ` 
@@ -99,12 +125,12 @@ const renderTitles = (data) => {
                 <img src="${show.jawSummary.backgroundImage.url}" alt="poster" class="tile-poster">
             </div>
             <div class="show-body">
-            <p>Seasons: ${show.jawSummary.seasonCount}</p>
             <h4 class="title">${show.jawSummary.title}</h4>
+            <p>Seasons: ${show.jawSummary.seasonCount}</p>
                 <div class="info">
-                    <small class="title-description">${show.jawSummary.synopsis}</small>
-                </div>
-                <button class="btn-watch">Watch Now</button>
+                <i class="fa-solid fa-star"></i> 4.7
+                <p class="genre">${show.jawSummary.genres[1].name}</p>
+               </div>
             </div>
         </article>
 

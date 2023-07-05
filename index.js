@@ -56,7 +56,7 @@ const getTitles = ()=> {
     // .then(response => console.log(response.suggestions[0].summary.name))
     // .then(data => console.log(data.suggestions.sumary.name))
 }
-getTitles()
+// getTitles()
 
 const renderTitles = (data) => {
     // console.log(data);

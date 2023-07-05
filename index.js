@@ -16,13 +16,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
     searchBtn.addEventListener("click", (e)=> {
         e.preventDefault()
         const search = document.getElementById('search').value
-        let wrapped = search;
-        
-        if(!('"' === wrapped[0] && '"' === wrapped.slice(-1))) {
-            wrapped = `"${wrapped}"`
-            console.log(wrapped);
-            // searchMovies(wrapped)
-        }
+        // searchMovies(wrapped)
     })
 })
 
@@ -37,6 +31,7 @@ async function get() {
     }
 }
 
+// Search movies by name
 const searchMovies = (search)=> {
     fetch(`https://netflix54.p.rapidapi.com/search/?query=${search}&offset=0&limit_titles=50&limit_suggestions=20&lang=en`, options)
     .then(response => response.json())
@@ -45,6 +40,7 @@ const searchMovies = (search)=> {
     .catch(error => error)
 }
 
+// Fetches movie data from api
 const getTitles = ()=> {
     fetch(url, options)
     .then(response => response.json())
@@ -53,6 +49,7 @@ const getTitles = ()=> {
 }
 getTitles()
 
+// Renders fetched data on the html page
 const renderTitles = (data) => {
     
     const shows = data.titles.filter(show => show.jawSummary.type === "show" && show.jawSummary.watched === false)
@@ -102,6 +99,8 @@ const renderTitles = (data) => {
 //         return li;
 // }
 
+
+// Creates movie and series card template
 const createMovieCard = (item)=> {
     const li = document.createElement("li")
     li.className = 'title'
@@ -122,6 +121,7 @@ const createMovieCard = (item)=> {
     return li;
 }
 
+// Created trending movie card template
 const createTrendingItemCard = (item)=> {
     const li = document.createElement("li")
 

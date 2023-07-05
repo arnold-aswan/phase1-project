@@ -9,6 +9,8 @@ const options = {
 	}
 };
 
+
+
 document.addEventListener('DOMContentLoaded', ()=> {
     const searchBtn = document.getElementById('btn-search')
     searchBtn.addEventListener("click", (e)=> {
@@ -52,77 +54,89 @@ const getTitles = ()=> {
 getTitles()
 
 const renderTitles = (data) => {
-    // console.log(data);
     
     const shows = data.titles.filter(show => show.jawSummary.type === "show" && show.jawSummary.watched === false)
     const movies = data.titles.filter(movie => movie.jawSummary.type === "movie" && movie.jawSummary.watched === false)
   
-    const watchedShows = data.titles.filter(wshow => wshow.jawSummary.watched === true)
+    const trendingShows = data.titles.filter(wshow => wshow.jawSummary.watched === true)
+    const typeMovies = data.titles.filter(wmovie => wmovie.summary.type === 'movie')
     const watchedMovies = typeMovies.filter(wshow => wshow.jawSummary.watched === true)
-    
-    console.log(watchedShows);
-
-    watchedShows.map(wshow => {
-        const watchedUl = document.querySelector('.watched-list')
-        const li = document.createElement("li")
-
-        li.className = 'watched-show'
-        li.innerHTML = ` <article class="wshow">
-        <div class="watched-show-poster">
-            <img src="${wshow.jawSummary.backgroundImage.url}" alt="title-poster" class="watched-poster">
-        </div>
-        <div class="wshow-body">
-            <h5 class="title">${wshow.jawSummary.title}</h5>
-                <div class="winfo">
-                 <i class="fa-solid fa-star"></i> 4.7
-                 <p class="wgenre">${wshow.jawSummary.genres[0].name}</p>
-                </div>
-            </div>
-    </article>`
-    watchedUl.append(li)
-    })
 
     movies.map(movie => {
         const moviesUl = document.querySelector('.suggested-shows')
-        const li = document.createElement("li")
-        li.className = 'title'
-        li.innerHTML = `
-        <article class="show">
-            <div class="show-poster">
-                <img src="${movie.jawSummary.backgroundImage.url}" alt="poster" class="tile-poster">
-            </div>
-            <div class="show-body">
-            <h4 class="title">${movie.jawSummary.title}</h4>
-                <div class="info">
-                 <i class="fa-solid fa-star"></i> 4.7
-                 <p class="genre">${movie.jawSummary.genres[0].name}</p>
-                </div>
-            </div>
-        </article>
-        ` 
+        const li = createMovieCard(movie)
         moviesUl.append(li)
     })
     
     shows.map(show => {
         const showsUl = document.querySelector('.shows')
-        const li = document.createElement("li")
-        li.className = 'title'
-        li.innerHTML = `
-        <article class="show">
-            <div class="show-poster">
-                <img src="${show.jawSummary.backgroundImage.url}" alt="poster" class="tile-poster">
-            </div>
-            <div class="show-body">
-            <h4 class="title">${show.jawSummary.title}</h4>
-            <p>Seasons: ${show.jawSummary.seasonCount}</p>
-                <div class="info">
-                <i class="fa-solid fa-star"></i> 4.7
-                <p class="genre">${show.jawSummary.genres[1].name}</p>
-               </div>
-            </div>
-        </article>
-
-        ` 
+        const li = createMovieCard(show)
         showsUl.append(li)
     })
+
+    trendingShows.map(wshow => {
+        const watchedUl = document.querySelector('.trending-list')
+        const li = createTrendingItemCard(wshow)
+        watchedUl.append(li)
+    })
+}
+
+// const createShow = (item)=> {
+//     const li = document.createElement("li")
+//         li.className = 'title'
+//         li.innerHTML = `
+//         <article class="show">
+//             <div class="show-poster">
+//                 <img src="${item.jawSummary.backgroundImage.url}" alt="poster" class="tile-poster">
+//             </div>
+//             <div class="show-body">
+//             <h4 class="title">${item.jawSummary.title}</h4>
+//             <p>Seasons: ${item.jawSummary.seasonCount}</p>
+//                 <div class="info">
+//                 <i class="fa-solid fa-star"></i> 4.7
+//                 <p class="genre">${item.jawSummary.genres[1].name}</p>
+//                </div>
+//             </div>
+//         </article>
+//         ` 
+//         return li;
+// }
+
+const createMovieCard = (item)=> {
+    const li = document.createElement("li")
+    li.className = 'title'
+    li.innerHTML = `
+    <article class="show">
+        <div class="show-poster">
+            <img src="${item.jawSummary.backgroundImage.url}" alt="poster" class="tile-poster">
+        </div>
+        <div class="show-body">
+        <h4 class="title">${item.jawSummary.title}</h4>
+            <div class="info">
+             <i class="fa-solid fa-star"></i> 4.7
+             <p class="genre">${item.jawSummary.genres[0].name}</p>
+            </div>
+        </div>
+    </article>
+    `;
+    return li;
+}
+
+const createTrendingItemCard = (item)=> {
+    const li = document.createElement("li")
+
+        li.className = 'trending-show'
+        li.innerHTML = ` <article class="wshow">
+        <div class="trending-show-poster">
+            <img src="${item.jawSummary.backgroundImage.url}" alt="title-poster" class="trending-poster">
+        </div>
+        <div class="wshow-body">
+            <h5 class="wtitle">${item.jawSummary.title}</h5>
+                <div class="winfo">
+                 <i class="fa-solid fa-star"></i> 4.7
+                 <p class="wgenre">${item.jawSummary.genres[0].name}</p>
+                </div>
+            </div>
+    </article>`
+    return li;
 }

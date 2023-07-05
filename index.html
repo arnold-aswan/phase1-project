@@ -7,10 +7,10 @@
     <title>Document</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://kit.fontawesome.com/47e40bfee6.js" crossorigin="anonymous"></script>
-     <!-- <script defer type="module" src="./index.js"></script> -->
+     <script defer type="module" src="./index.js"></script>
      
 </head>
-<body>
+<body> 
     <main class="main-container">
         <header>
             <div class="logo">
@@ -49,17 +49,37 @@
             </article>
         </section>
 
-        <section class="suggested-shows">
-            <!-- <h1>Trending Movies</h1> -->
+        <section class="suggested-movies">
+            <h1>Trending Movies</h1>
             <ul class="suggested-shows">
 
             </ul>
         </section>
         <section class="titles">
+            <div class="unwatched-titles">
             <h1>For you</h1>
-            <ul class="shows">
+                <ul class="shows">
                 
-            </ul>
+                </ul>
+            </div>
+            <aside class="watched-titles">
+                <ul class="watched-list">
+                    <li>
+                        <article class="wshow">
+                            <div class="watched-show-poster">
+                                <img src="./imgs/107145.jpg" alMoviest="title-poster" class="watched-poster">
+                            </div>
+                            <div class="wshow-body">
+                                <h5 class="wtitle">lorem ipsum</h5>
+                                <div class="winfo">
+                                    <i class="fa-solid fa-star"></i> 4.7
+                                    <p class="wgenre">anime</p>
+                                </div>
+                            </div>
+                        </article>
+                    </li>
+                </ul>
+            </aside>
         </section>
     </main>
 </body>

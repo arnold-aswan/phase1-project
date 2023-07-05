@@ -24,6 +24,9 @@ ul {
 button {
     cursor: pointer;
 }
+section {
+    padding-block: 5rem;
+}
 
 body {
     font-family: 'Inter', sans-serif;
@@ -39,7 +42,7 @@ body {
     margin: 1rem;
 }
 
-/* ====== HEADER ========== */
+/* ========= HEADER ========== */
 header {
     display: flex;
     align-items: center;
@@ -93,7 +96,6 @@ header {
 }
 /* ========== END OF HEADER ============== */
 
-
 /* ========== INTRO SECTION ============== */
 .intro {
     font-family: poppins;
@@ -123,7 +125,7 @@ header {
 }
 /* ========== END OF INTRO SECTION ======== */
 
-/* ========== SUGGESTED SHOWS SECTION ===== */
+/* ========== SHOWS SECTION =============== */
 .titles {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -179,8 +181,13 @@ header {
     padding-left: .5rem;
     border-left: 2px solid gray;
 }
+/* ======== END OF SHOWS SECTION ============ */
 
-ul.watched-list {
+/* ======== TRENDING SHOWS LIST SECTION =========== */
+.wtitles {
+    text-align: end;
+}
+ul.trending-list {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -189,7 +196,7 @@ ul.watched-list {
     display: flex;
     max-width: 27rem;
 }
-.watched-poster {
+.trending-poster {
     max-width: 18rem;
     border-top-left-radius: .5rem;
     border-bottom-left-radius: .5rem;
@@ -208,15 +215,13 @@ ul.watched-list {
 .wgenre{
     font-size: 1rem;
 }
-.watched-show {
+.trending-show {
     cursor: pointer;
     display: flex;
     justify-content: flex-end;
 }
-.watched-show:hover .wshow-body{
+.trending-show:hover .wshow-body{
     background: var(--pink);
 }
 
-section {
-    padding-block: 5rem;
-}
+/* ======== END OF TRENDING SHOWS LIST ============ */

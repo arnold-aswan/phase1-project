@@ -1,6 +1,6 @@
 import { API_KEY } from "./config.js";
 
-const url = 'https://netflix54.p.rapidapi.com/search/?query=all&offset=0&limit_titles=60&limit_suggestions=20&lang=en';
+const url = 'https://netflix54.p.rapidapi.com/search/?query=all&offset=0&limit_titles=50&limit_suggestions=20&lang=en';
 const options = {
 	method: 'GET',
 	headers: {
@@ -8,8 +8,6 @@ const options = {
 		'X-RapidAPI-Host': 'netflix54.p.rapidapi.com'
 	}
 };
-
-
 
 document.addEventListener('DOMContentLoaded', ()=> {
     const searchBtn = document.getElementById('btn-search')
@@ -37,8 +35,6 @@ async function get() {
     }
 }
 
-// get()
-
 const searchMovies = (search)=> {
     fetch(`https://netflix54.p.rapidapi.com/search/?query=${search}&offset=0&limit_titles=50&limit_suggestions=20&lang=en`, options)
     .then(response => response.json())
@@ -52,9 +48,6 @@ const getTitles = ()=> {
     .then(response => response.json())
     .then(data => renderTitles(data))
     .catch(error => error)
-
-    // .then(response => console.log(response.suggestions[0].summary.name))
-    // .then(data => console.log(data.suggestions.sumary.name))
 }
 getTitles()
 
@@ -65,14 +58,10 @@ const renderTitles = (data) => {
     const movies = data.titles.filter(movie => movie.jawSummary.type === "movie" && movie.jawSummary.watched === false)
   
     const watchedShows = data.titles.filter(wshow => wshow.jawSummary.watched === true)
-    const typeMovies = data.titles.filter(wmovie => wmovie.summary.type === 'movie')
     const watchedMovies = typeMovies.filter(wshow => wshow.jawSummary.watched === true)
     
     console.log(watchedShows);
-    // console.log(typeMovies);
-    // console.log(watchedMovies);
-    // console.log(shows);
-    // console.log(movies);
+
     watchedShows.map(wshow => {
         const watchedUl = document.querySelector('.watched-list')
         const li = document.createElement("li")
@@ -115,7 +104,6 @@ const renderTitles = (data) => {
     })
     
     shows.map(show => {
-        // console.log(show);
         const showsUl = document.querySelector('.shows')
         const li = document.createElement("li")
         li.className = 'title'

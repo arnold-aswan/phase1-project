@@ -1,4 +1,4 @@
-import { API_KEY } from "./config.js";
+import { API_KEY } from "./src/config.js";
 
 const url = 'https://netflix54.p.rapidapi.com/search/?query=all&offset=0&limit_titles=50&limit_suggestions=20&lang=en';
 const options = {
@@ -32,27 +32,21 @@ document.addEventListener('DOMContentLoaded', ()=> {
         movies.classList.toggle('clip')
         if(movies.classList.contains('clip')) {
             e.target.innerText = `View Less`
-        } 
+        } else if (!movies.classList.contains('clip')){
+            e.target.innerText = `View More`
+        }
     })
 
     overlay.addEventListener("click", (e)=> {
         const searchResults = document.querySelector('.search-results')
         searchResults.classList.toggle('hide')
         overlay.classList.toggle('show')
+        document.querySelector('.form-control').reset()
+        const searchList = document.querySelector('.searches')
+        searchList.innerHTML = ""
     })
-    // getTitles()
+    getTitles()
 })
-
-async function get() {
-    try {
-        const response = await fetch(url, options);
-        const result = await response.json();
-        console.log(result);
-        const data = await data;
-    } catch (error) {
-        console.error(error);
-    }
-}
 
 // Search movies by name
 const searchMovies = (search)=> {
@@ -69,6 +63,7 @@ const getTitles = ()=> {
     .then(data => renderTitles(data))
     .catch(error => error)
 }
+
 // Renders and filters search results
 const renderSearchedItems = (data)=> {
     const search = document.getElementById('search').value
@@ -132,28 +127,6 @@ const searchCard =(item)=> {
         `;
      return li;   
 }
-
-// const createShow = (item)=> {
-//     const li = document.createElement("li")
-//         li.className = 'title'
-//         li.innerHTML = `
-//         <article class="show">
-//             <div class="show-poster">
-//                 <img src="${item.jawSummary.backgroundImage.url}" alt="poster" class="tile-poster">
-//             </div>
-//             <div class="show-body">
-//             <h4 class="title">${item.jawSummary.title}</h4>
-//             <p>Seasons: ${item.jawSummary.seasonCount}</p>
-//                 <div class="info">
-//                 <i class="fa-solid fa-star"></i> 4.7
-//                 <p class="genre">${item.jawSummary.genres[1].name}</p>
-//                </div>
-//             </div>
-//         </article>
-//         ` 
-//         return li;
-// }
-
 
 // Creates movie and series card template
 const createMovieCard = (item)=> {

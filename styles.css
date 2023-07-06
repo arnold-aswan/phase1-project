@@ -4,6 +4,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 :root {
     --pink: #ffafcc;
@@ -21,13 +22,20 @@ a, i{
     color: #fff;
     cursor: pointer;
 }
-
 ul {
     list-style-type: none;
     display: flex;
 }
 button {
     cursor: pointer;
+    color: #fff;
+    font-family: poppins;
+    background: var(--pink);
+    border: none;
+    outline: none;
+}
+button:hover {
+    background: var(--green);
 }
 section {
     padding-block: 5rem;
@@ -35,12 +43,29 @@ section {
 
 body {
     font-family: 'Inter', sans-serif;
+    color: #fff;
     background: linear-gradient(rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0.60)), url("./imgs/2090760.png");
-    /* background-color: black; */
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    position: relative;
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    min-width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 9;
+    display: none;
+    cursor: pointer;
+}
+.overlay.show {
+    display: block;
 }
 
 .main-container {
@@ -52,13 +77,11 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 2rem auto;
+    margin: 2rem;
 }
-
 .logo {
     width: 5rem;
 }
-
 .nav-links,
 .profile-list {
     display: flex;
@@ -76,7 +99,6 @@ header {
 }
 .profile-link i {
     font-size: 1.5rem;
-    color: #fff;
     cursor: pointer;
     transition: all ease-in-out;
 }
@@ -94,17 +116,66 @@ header {
 }
 #btn-search {
     background: var(--pink);
+    margin-top: .2rem;
 }
 #btn-search i {
-    padding: .65rem 1rem;
-    /* color: #fff; */
+    padding: .6rem 1rem;
+    font-size: 1.1rem;
+}
+form {
+    position: relative;
+    z-index: 10;
+}
+.search-results {
+    margin-top: 1rem;
+    padding: .5rem 1rem;
+    background: var(--gray);
+    width: 100%;
+    border: 1px solid black;
+    border-radius: .5rem;
+    position: absolute;
+    top: 2rem;
+    display: none;
+}
+.search-results.hide {
+    display: block;
+}
+ul.searches {
+    flex-direction: column;
+    gap: .8rem;
+}
+ul.searches li {
+    cursor: pointer;
+}
+.search-list:hover {
+    background: var(--black);
+    color: var(--pink);
+}
+
+.search-result {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+}
+.searchposter, .search-poster {
+    max-width: 5rem;
+    border-radius: .3rem;
+}
+.searchtitle  p {
+    font-size: .9rem;
+}
+.searchtitle  small {
+    font-size: .7rem;
+}
+.searchtitle span {
+    padding-left: 5px;
+    border-left: 2px solid white;
 }
 /* ========== END OF HEADER ============== */
 
 /* ========== INTRO SECTION ============== */
 .intro {
     font-family: poppins;
-    color: #fff;
     padding: 5rem 3rem;
 }
 .intro-info {
@@ -119,15 +190,12 @@ header {
     padding-block: .9rem;
 }
 .btn-start {
-    font-family: poppins;
-    color: #fff;
     font-size: 1.2rem;
     font-weight: 700;
     padding: 1rem 3rem;
-    border: none;
     border-radius: 2rem;
-    background: var(--pink);
 }
+
 /* ========== END OF INTRO SECTION ======== */
 
 /* ========== SHOWS SECTION =============== */
@@ -140,10 +208,18 @@ header {
     width: 100%;
 }
 
+.suggested-movies {
+    max-height: 74rem;
+    overflow: hidden;
+    transition: all .5s ease-in-out;
+}
+.suggested-movies.clip {
+    max-height: 160rem;
+}
+
 .suggested-movies h1,
 .titles h1,
 .wtitles {
-    color: #fff;
     font-family: poppins;
 }
 .shows, 
@@ -162,7 +238,6 @@ header {
 
 .show-body {
     background: black;
-    color:#fff;
     padding: .5rem .8rem;
     border-bottom-left-radius: .5rem;
     border-bottom-right-radius: .5rem;
@@ -187,17 +262,9 @@ header {
     border-left: 2px solid gray;
 }
 .btn-more {
-    color: #fff;
-    font-family: poppins;
     font-weight: 500;
     padding: .6rem .8rem;
-    background: transparent;
     border-radius: .5rem;
-    border: 2px solid var(--pink);
-    outline: none;
-}
-.btn-more:hover {
-    background: var(--pink);
 }
 /* ======== END OF SHOWS SECTION ============ */
 
@@ -223,7 +290,6 @@ ul.trending-list {
     background: black;
     border-top-right-radius: .5rem;
     border-bottom-right-radius: .5rem;
-    color: #fff;
     padding: .5rem;
     display: flex;
     flex-direction: column;
@@ -245,7 +311,6 @@ ul.trending-list {
 
 /* ========= FOOTER ============= */
 footer {
-    color: #fff;
     padding: 2rem 3rem;
     display: flex;
     align-items: cennter;
@@ -274,63 +339,8 @@ footer {
     color: var(--pink);
 }
 /* ========== END OF FOOTER =========== */
-form {
-    position: relative;
-}
-.search-results {
-    margin-top: 1rem;
-    padding: .5rem 1rem;
-    background: var(--gray);
-    color: #fff;
-    width: 100%;
-    border: 1px solid black;
-    border-radius: .5rem;
-    position: absolute;
-    top: 2rem;
-    display: none;
-}
-.search-results.hide {
-    display: block;
-}
-ul.searches {
-    flex-direction: column;
-    gap: .8rem;
-}
 
-ul.searches li {
-    cursor: pointer;
-}
-.search-list:hover {
-    background: var(--black);
-    color: var(--pink);
-}
 
-.search-result {
-    display: flex;
-    align-items: center;
-    gap: .6rem;
-}
-.searchposter, .search-poster {
-    max-width: 5rem;
-    border-radius: .3rem;
-}
-.searchtitle  p {
-    font-size: .9rem;
-}
-.searchtitle  small {
-    font-size: .7rem;
-}
-.searchtitle span {
-    padding-left: 5px;
-    border-left: 2px solid white;
-}
 
-.suggested-movies {
-    max-height: 74rem;
-    overflow: hidden;
-    transition: all .5s ease-in-out;
-}
-.suggested-movies.clip {
-    max-height: 160rem;
-}
+
 

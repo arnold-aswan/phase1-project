@@ -11,15 +11,16 @@ const options = {
 
 
 document.addEventListener('DOMContentLoaded', ()=> {
-    const searchBtn = document.getElementById('btn-search')
-    searchBtn.addEventListener("click", (e)=> {
+    const overlay = document.querySelector('.overlay')
+    const form = document.querySelector('.form-control')
+    form.addEventListener("submit", (e)=> {
         e.preventDefault()
         const search = document.getElementById('search').value
         let wrapped = search
         if(wrapped[0] !== '"' && wrapped.slice(-1) !== '"') {
             wrapped = `'${wrapped}'`
-            // console.log(wrapped);
             const sch = document.querySelector('.search-results')
+            overlay.classList.toggle('show')
             sch.classList.toggle('hide')
             searchMovies(wrapped)
         }
@@ -30,8 +31,14 @@ document.addEventListener('DOMContentLoaded', ()=> {
         const movies = document.querySelector('.suggested-movies')
         movies.classList.toggle('clip')
         if(movies.classList.contains('clip')) {
-            e.target.innerHTML = `View Less <i class="fa-solid fa-arrow-up-right-from-square"></i>`
-        }
+            e.target.innerText = `View Less`
+        } 
+    })
+
+    overlay.addEventListener("click", (e)=> {
+        const searchResults = document.querySelector('.search-results')
+        searchResults.classList.toggle('hide')
+        overlay.classList.toggle('show')
     })
     // getTitles()
 })
@@ -55,6 +62,13 @@ const searchMovies = (search)=> {
     .catch(error => error)
 }
 
+// Fetches movie data from api
+const getTitles = ()=> {
+    fetch(url, options)
+    .then(response => response.json())
+    .then(data => renderTitles(data))
+    .catch(error => error)
+}
 // Renders and filters search results
 const renderSearchedItems = (data)=> {
     const search = document.getElementById('search').value
@@ -67,37 +81,6 @@ const renderSearchedItems = (data)=> {
         ul.append(li)
     })
 }
-
-// Creates search results template
-const searchCard =(item)=> {
-    const li = document.createElement("li")
-    li.className = 'search-list'
-        li.innerHTML = `
-        <article class="search-result">
-             <div class="searchposter">
-                <img src="${item.jawSummary.backgroundImage.url}" class="search-poster">
-             </div>
-            <div class="searchtitle">
-                <p>${item.jawSummary.title}</p>
-                 <div class="rating">
-                    <small>
-                    <i class="fa-solid fa-star"></i>
-                    4.7 <span> ${item.jawSummary.genres[0].name}</span></small>
-                </div>
-            </div>
-        </article>
-        `;
-     return li;   
-}
-
-// Fetches movie data from api
-const getTitles = ()=> {
-    fetch(url, options)
-    .then(response => response.json())
-    .then(data => renderTitles(data))
-    .catch(error => error)
-}
-// getTitles()
 
 // Renders fetched data on the html page
 const renderTitles = (data) => {
@@ -126,6 +109,28 @@ const renderTitles = (data) => {
         const li = createTrendingItemCard(wshow)
         watchedUl.append(li)
     })
+}
+
+// Creates search results template
+const searchCard =(item)=> {
+    const li = document.createElement("li")
+    li.className = 'search-list'
+        li.innerHTML = `
+        <article class="search-result">
+             <div class="searchposter">
+                <img src="${item.jawSummary.backgroundImage.url}" class="search-poster">
+             </div>
+            <div class="searchtitle">
+                <p>${item.jawSummary.title}</p>
+                 <div class="rating">
+                    <small>
+                    <i class="fa-solid fa-star"></i>
+                    4.7 <span> ${item.jawSummary.genres[0].name}</span></small>
+                </div>
+            </div>
+        </article>
+        `;
+     return li;   
 }
 
 // const createShow = (item)=> {

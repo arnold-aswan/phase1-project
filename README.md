@@ -5,19 +5,6 @@ Akatsuki is your go to destination for all your movie and tv-show streaming need
 
 Discover a massive library of movies from the good old classics to the latest and greatest, from heart warming drama and comedy to jaw dropping action flicks, to skin crawling horror thriller. Akatsuki movies HUB has something for everyone.
 
-## Key Features
-1. Vast movie library. Dive into a wide diverse collection of movies and series, carefully curated to cater for a wide range of tastes and preferences.
-
-2. User-friendly interface. Akatsuki provides a sleek interface that makes browsing and discovering new movies easy peezy, it also hides already watched movies, so you dont have to skim throug them again.
-
-3. A search feature to search and find your favourite movies if you don't find it in your suggested movies already that is.
-
-4. Customized reccomendations and suggestions. Akatsuki analyzes your watching habbits and patterns to suggest personalized films.
-
-5. A rating system. if you dont like it, give it a low recommendation and all films that are similar to that one will automatically be dropped just for you and new different ones will be populated as well and if you liked it, give it 5 stars and more similar films will be reccomended for you.
-
-6. User profiles and watchlists.
-
 ## Setup Requirements
 - Git
 - Web-browser of your choice

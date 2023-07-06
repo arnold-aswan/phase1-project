@@ -5,6 +5,12 @@ Akatsuki is your go to destination for all your movie and tv-show streaming need
 
 Discover a massive library of movies from the good old classics to the latest and greatest, from heart warming drama and comedy to jaw dropping action flicks, to skin crawling horror thriller. Akatsuki movies HUB has something for everyone.
 
+## Deployed Site 
+https://arnold-aswan.github.io/phase1-project/
+
+## Live Demo
+https://github.com/arnold-aswan/phase1-project/assets/135007872/958ab173-66c3-4d54-90ea-937e91240cfc
+
 ## Setup Requirements
 - Git
 - Web-browser of your choice

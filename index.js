@@ -10,13 +10,19 @@ const options = {
 };
 
 
-
 document.addEventListener('DOMContentLoaded', ()=> {
     const searchBtn = document.getElementById('btn-search')
     searchBtn.addEventListener("click", (e)=> {
         e.preventDefault()
         const search = document.getElementById('search').value
-        // searchMovies(wrapped)
+        let wrapped = search
+        if(wrapped[0] !== '"' && wrapped.slice(-1) !== '"') {
+            wrapped = `'${wrapped}'`
+            // console.log(wrapped);
+            const sch = document.querySelector('.search-results')
+            sch.classList.toggle('hide')
+            searchMovies(wrapped)
+        }
     })
 })
 
@@ -35,9 +41,41 @@ async function get() {
 const searchMovies = (search)=> {
     fetch(`https://netflix54.p.rapidapi.com/search/?query=${search}&offset=0&limit_titles=50&limit_suggestions=20&lang=en`, options)
     .then(response => response.json())
-    .then(response => console.log(response))
-    .then(data => data)
+    .then(data => renderSearchedItems(data))
     .catch(error => error)
+}
+
+const renderSearchedItems = (data)=> {
+    const search = document.getElementById('search').value
+    let wrapped = search
+        
+    const searched = data.titles.filter(searchFilter => searchFilter.jawSummary.title.toLowerCase() == wrapped)
+    searched.map(searchFilter => {
+        const ul = document.querySelector('.searches')
+        const li = searchCard(searchFilter)
+        ul.append(li)
+    })
+}
+
+const searchCard =(item)=> {
+    const li = document.createElement("li")
+    li.className = 'search-list'
+        li.innerHTML = `
+        <article class="search-result">
+             <div class="searchposter">
+                <img src="${item.jawSummary.backgroundImage.url}" class="search-poster">
+             </div>
+            <div class="searchtitle">
+                <p>${item.jawSummary.title}</p>
+                 <div class="rating">
+                    <small>
+                    <i class="fa-solid fa-star"></i>
+                    4.7 <span> ${item.jawSummary.genres[0].name}</span></small>
+                </div>
+            </div>
+        </article>
+        `;
+     return li;   
 }
 
 // Fetches movie data from api
@@ -47,7 +85,7 @@ const getTitles = ()=> {
     .then(data => renderTitles(data))
     .catch(error => error)
 }
-getTitles()
+// getTitles()
 
 // Renders fetched data on the html page
 const renderTitles = (data) => {

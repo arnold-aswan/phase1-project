@@ -24,6 +24,16 @@ document.addEventListener('DOMContentLoaded', ()=> {
             searchMovies(wrapped)
         }
     })
+
+    const viewMoreBtn = document.querySelector('.btn-more')
+    viewMoreBtn.addEventListener("click", (e)=> {
+        const movies = document.querySelector('.suggested-movies')
+        movies.classList.toggle('clip')
+        if(movies.classList.contains('clip')) {
+            e.target.innerHTML = `View Less <i class="fa-solid fa-arrow-up-right-from-square"></i>`
+        }
+    })
+    // getTitles()
 })
 
 async function get() {
@@ -45,6 +55,7 @@ const searchMovies = (search)=> {
     .catch(error => error)
 }
 
+// Renders and filters search results
 const renderSearchedItems = (data)=> {
     const search = document.getElementById('search').value
     let wrapped = search
@@ -57,6 +68,7 @@ const renderSearchedItems = (data)=> {
     })
 }
 
+// Creates search results template
 const searchCard =(item)=> {
     const li = document.createElement("li")
     li.className = 'search-list'

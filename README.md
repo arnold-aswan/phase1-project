@@ -13,7 +13,6 @@ https://github.com/arnold-aswan/phase1-project/assets/135007872/958ab173-66c3-4d
 
 ## Screenshots
 - ![Screenshot from 2023-07-06 22-14-46](https://github.com/arnold-aswan/phase1-project/assets/135007872/9522c34c-b3e9-4cc2-8cd1-8f009548bc04)
-- ![Screenshot from 2023-07-06 22-15-37](https://github.com/arnold-aswan/phase1-project/assets/135007872/654370ac-0163-4843-96bf-ac5f0b4c1b2b)
 - ![Screenshot from 2023-07-06 22-16-43](https://github.com/arnold-aswan/phase1-project/assets/135007872/accb3de1-6fc1-41a9-838f-c04a36935640)
 - ![Screenshot from 2023-07-06 22-16-25](https://github.com/arnold-aswan/phase1-project/assets/135007872/61e54890-00a2-4880-bd0c-bd4e97eca938)
 
@@ -21,7 +20,7 @@ https://github.com/arnold-aswan/phase1-project/assets/135007872/958ab173-66c3-4d
 - Git
 - Web-browser of your choice
 - Github
-- Netflix api [https://rapidapi.com/Glavier/api/netflix54/] from rapidapi.com 
+- Netflix api from `https://rapidapi.com/Glavier/api/netflix54/`  
 
 ## Development Server 
 1. Subscribe to rapidapi to get api key for authentication with the api

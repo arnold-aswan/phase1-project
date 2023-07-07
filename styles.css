@@ -272,6 +272,9 @@ ul.searches li {
 .title {
     cursor: pointer;
 }
+.show:hover  .show-body{
+    background-color: var(--green);
+}
 .wtitles {
     text-align: end;
 }
